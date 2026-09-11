@@ -3,6 +3,7 @@ import { Counter } from "./Counter";
 import { CounterReset } from "./CounterReset";
 import { CountSummary } from "./CountSummary";
 import { HistoryControls } from "./HistoryControls";
+import { HistoryStatus } from "./HistoryStatus";
 import { StepControl } from "./StepControl";
 import { useCounterHistory } from "./useCounterHistory";
 
@@ -40,6 +41,7 @@ function App() {
         undo={undo}
         redo={redo}
       />
+      <HistoryStatus canUndo={past.length > 0} canRedo={future.length > 0} />
       <StepControl step={step} setStep={setStep} />
       <CounterReset reset={reset} />
     </>
