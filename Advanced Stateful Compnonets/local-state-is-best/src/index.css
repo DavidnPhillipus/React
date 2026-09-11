@@ -17,3 +17,9 @@ label,
 input {
   margin: 0.5rem;
 }
+
+.history-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}

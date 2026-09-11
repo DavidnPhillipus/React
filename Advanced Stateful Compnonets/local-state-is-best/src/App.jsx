@@ -1,23 +1,58 @@
 import { useState } from "react";
 import { Counter } from "./Counter";
 import { CounterReset } from "./CounterReset";
+import { HistoryControls } from "./HistoryControls";
 import { useLocalStorage } from "./useLocalStorage";
 
 function App() {
   const [count, setCount] = useLocalStorage("local-state-count", 0);
   const [step, setStep] = useState(1);
+  const [past, setPast] = useState([]);
+  const [future, setFuture] = useState([]);
 
   function changeCount(amount) {
-    setCount((currentCount) => currentCount + amount * step);
+    setCount((currentCount) => {
+      setPast((history) => [...history, currentCount]);
+      setFuture([]);
+      return currentCount + amount * step;
+    });
   }
 
   function reset() {
-    setCount(0);
+    setCount((currentCount) => {
+      setPast((history) => [...history, currentCount]);
+      setFuture([]);
+      return 0;
+    });
+  }
+
+  function undo() {
+    const previousCount = past.at(-1);
+
+    if (previousCount === undefined) return;
+    setPast((history) => history.slice(0, -1));
+    setFuture((history) => [count, ...history]);
+    setCount(previousCount);
+  }
+
+  function redo() {
+    const nextCount = future[0];
+
+    if (nextCount === undefined) return;
+    setFuture((history) => history.slice(1));
+    setPast((history) => [...history, count]);
+    setCount(nextCount);
   }
 
   return (
     <>
       <Counter count={count} step={step} changeCount={changeCount} />
+      <HistoryControls
+        canUndo={past.length > 0}
+        canRedo={future.length > 0}
+        undo={undo}
+        redo={redo}
+      />
       <label>
         Step
         <input
