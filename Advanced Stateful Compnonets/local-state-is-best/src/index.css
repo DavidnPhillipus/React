@@ -24,6 +24,11 @@ input {
   margin: 0.5rem;
 }
 
+.step-control {
+  display: inline-flex;
+  align-items: center;
+}
+
 .history-controls {
   display: flex;
   gap: 0.5rem;

@@ -3,6 +3,7 @@ import { Counter } from "./Counter";
 import { CounterReset } from "./CounterReset";
 import { CountSummary } from "./CountSummary";
 import { HistoryControls } from "./HistoryControls";
+import { StepControl } from "./StepControl";
 import { useCounterHistory } from "./useCounterHistory";
 
 function App() {
@@ -39,15 +40,7 @@ function App() {
         undo={undo}
         redo={redo}
       />
-      <label>
-        Step
-        <input
-          min="1"
-          type="number"
-          value={step}
-          onChange={(event) => setStep(Math.max(1, Number(event.target.value)))}
-        />
-      </label>
+      <StepControl step={step} setStep={setStep} />
       <CounterReset reset={reset} />
     </>
   );
