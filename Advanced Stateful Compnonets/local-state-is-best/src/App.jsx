@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Counter } from "./Counter";
 import { CounterReset } from "./CounterReset";
+import { useLocalStorage } from "./useLocalStorage";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useLocalStorage("local-state-count", 0);
   const [step, setStep] = useState(1);
 
   function changeCount(amount) {
