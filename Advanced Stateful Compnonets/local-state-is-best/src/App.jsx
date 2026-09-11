@@ -3,46 +3,18 @@ import { Counter } from "./Counter";
 import { CounterReset } from "./CounterReset";
 import { CountSummary } from "./CountSummary";
 import { HistoryControls } from "./HistoryControls";
-import { useLocalStorage } from "./useLocalStorage";
+import { useCounterHistory } from "./useCounterHistory";
 
 function App() {
-  const [count, setCount] = useLocalStorage("local-state-count", 0);
+  const { count, future, past, redo, undo, updateCount } = useCounterHistory();
   const [step, setStep] = useState(1);
-  const [past, setPast] = useState([]);
-  const [future, setFuture] = useState([]);
 
   function changeCount(amount) {
-    setCount((currentCount) => {
-      setPast((history) => [...history, currentCount]);
-      setFuture([]);
-      return currentCount + amount * step;
-    });
+    updateCount((currentCount) => currentCount + amount * step);
   }
 
   function reset() {
-    setCount((currentCount) => {
-      setPast((history) => [...history, currentCount]);
-      setFuture([]);
-      return 0;
-    });
-  }
-
-  function undo() {
-    const previousCount = past.at(-1);
-
-    if (previousCount === undefined) return;
-    setPast((history) => history.slice(0, -1));
-    setFuture((history) => [count, ...history]);
-    setCount(previousCount);
-  }
-
-  function redo() {
-    const nextCount = future[0];
-
-    if (nextCount === undefined) return;
-    setFuture((history) => history.slice(1));
-    setPast((history) => [...history, count]);
-    setCount(nextCount);
+    updateCount(0);
   }
 
   return (
