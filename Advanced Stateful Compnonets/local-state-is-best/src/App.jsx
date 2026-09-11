@@ -4,9 +4,10 @@ import { CounterReset } from "./CounterReset";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1);
 
   function changeCount(amount) {
-    setCount((currentCount) => currentCount + amount);
+    setCount((currentCount) => currentCount + amount * step);
   }
 
   function reset() {
@@ -15,7 +16,16 @@ function App() {
 
   return (
     <>
-      <Counter count={count} changeCount={changeCount} />
+      <Counter count={count} step={step} changeCount={changeCount} />
+      <label>
+        Step
+        <input
+          min="1"
+          type="number"
+          value={step}
+          onChange={(event) => setStep(Math.max(1, Number(event.target.value)))}
+        />
+      </label>
       <CounterReset reset={reset} />
     </>
   );

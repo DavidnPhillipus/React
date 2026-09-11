@@ -12,3 +12,8 @@ body {
 button {
   cursor: pointer;
 }
+
+label,
+input {
+  margin: 0.5rem;
+}
