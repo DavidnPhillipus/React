@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Counter } from "./Counter";
 import { CounterReset } from "./CounterReset";
 import { CountSummary } from "./CountSummary";
@@ -16,6 +16,18 @@ function App() {
   function reset() {
     updateCount(0);
   }
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.target instanceof HTMLInputElement) return;
+      if (event.key === "ArrowUp") changeCount(1);
+      if (event.key === "ArrowDown") changeCount(-1);
+      if (event.key === "Escape") reset();
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  });
 
   return (
     <>

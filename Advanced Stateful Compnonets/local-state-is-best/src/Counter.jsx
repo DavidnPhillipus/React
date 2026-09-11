@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export function Counter({ count, step, changeCount }) {
   // This is a controlled component
   // It receives the count and changeCount function as props
@@ -10,9 +8,13 @@ export function Counter({ count, step, changeCount }) {
 
   return (
     <>
-      <button onClick={() => changeCount(-1)}>-</button>
+      <button aria-label={`Decrease by ${step}`} onClick={() => changeCount(-1)}>
+        -
+      </button>
       <output aria-live="polite">{count}</output>
-      <button onClick={() => changeCount(+1)}>+</button>
+      <button aria-label={`Increase by ${step}`} onClick={() => changeCount(1)}>
+        +
+      </button>
     </>
   );
 }
