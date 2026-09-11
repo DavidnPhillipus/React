@@ -1,3 +1,14 @@
+## Local State Lab
+
+This example demonstrates how a stateful React feature can stay organized as it grows.
+
+- Local step state belongs to the step control.
+- Counter history is managed by `useCounterHistory`.
+- Count and history metrics are derived during render.
+- Count persistence is isolated in `useLocalStorage`.
+- Undo, redo, reset, and keyboard controls share one state boundary.
+
+Run it with `npm install` followed by `npm run dev`. Use the arrow keys to change the count and `Escape` to reset it.
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
