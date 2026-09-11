@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Counter } from "./Counter";
 import { CounterReset } from "./CounterReset";
+import { CountSummary } from "./CountSummary";
 import { HistoryControls } from "./HistoryControls";
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -47,6 +48,7 @@ function App() {
   return (
     <>
       <Counter count={count} step={step} changeCount={changeCount} />
+      <CountSummary count={count} past={past} future={future} />
       <HistoryControls
         canUndo={past.length > 0}
         canRedo={future.length > 0}
