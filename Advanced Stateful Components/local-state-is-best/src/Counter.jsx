@@ -1,0 +1,18 @@
+import { useState } from "react";
+
+export function Counter({ count, changeCount, reset }) {
+  // This is a controlled component
+  // It receives the count and changeCount function as props
+  // It uses the count prop to display the current count
+  // It uses the changeCount function to update the count
+  // It uses the reset function to reset the count
+  // This is a controlled component
+
+  return (
+    <>
+      <button onClick={() => changeCount(-1)}>-</button>
+      {count}
+      <button onClick={() => changeCount(+1)}>+</button>
+    </>
+  );
+}
