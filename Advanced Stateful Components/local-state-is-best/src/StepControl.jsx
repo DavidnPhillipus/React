@@ -1,4 +1,4 @@
-export function StepControl({ step, setStep }) {
+﻿export function StepControl({ step, setStep }) {
   return (
     <label className="step-control">
       Step size
